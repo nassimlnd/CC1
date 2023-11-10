@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+<div class="p-8 space-y-2">
+    <div class="flex space-x-2">
+        <div class="font-semibold">{{ form_label(form.name) }}</div>
+        <div class="border border-gray-200 rounded-lg">{{ form_widget(form.name) }}</div>
+    </div>
+    <div class="flex space-x-2">
+        <div class="font-semibold">{{ form_label(form.nbPC) }}</div>
+        <div class="border border-gray-200 rounded-lg">{{ form_widget(form.nbPC) }}</div>
+    </div>
+    <div class="flex space-x-2">
+        <div class="font-semibold">{{ form_label(form.reserved) }}</div>
+        <div class="border border-gray-200 rounded-lg">{{ form_widget(form.reserved) }}</div>
+    </div>
+    <div class="flex space-x-2">
+        <div class="font-semibold">{{ form_label(form.codeBatiment) }}</div>
+        <div class="border border-gray-200 rounded-lg">{{ form_widget(form.codeBatiment) }}</div>
+    </div>
+</div>
+<button class="block text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg w-fit mt-5">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

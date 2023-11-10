@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room index{% endblock %}
+
+{% block body %}
+    <h1 class="text-2xl font-bold">Room index</h1>
+
+    <div class="p-8 space-y-2">
+        <h3 class="font-semibold">Filtre par PC</h3>
+
+        <form action="{{ path('app_room_index') }}" method="get" class="flex space-x-3">
+            <input name="pcMax" type="number" placeholder="Nombre de pc maximum"
+                   class="border border-gray-200 rounded p-2 w-56">
+            <button type="submit" class="text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg">Filtrer</button>
+        </form>
+    </div>
+
+    <table class="table w-full">
+        <thead class="bg-gray-100 divide-y divide-gray-300">
+        <tr>
+            <th class="p-2 text-center">Id</th>
+            <th class="p-2 text-center">Name</th>
+            <th class="p-2 text-center">NbPC</th>
+            <th class="p-2 text-center">Reserved</th>
+            <th class="p-2 text-center">CodeBatiment</th>
+            <th class="p-2 text-center">actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td class="p-2 text-center">{{ room.id }}</td>
+                <td class="p-2 text-center">{{ room.name }}</td>
+                <td class="p-2 text-center">{{ room.nbPC }}</td>
+                <td class="p-2 text-center">{{ room.reserved ? 'Yes' : 'No' }}</td>
+                <td class="p-2 text-center">{{ room.codeBatiment }}</td>
+                <td class="text-center flex justify-center space-x-4 py-2">
+                    <a href="{{ path('app_room_show', {'id': room.id}) }}" class="block text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg w-fit">Show</a>
+                    <a href="{{ path('app_room_edit', {'id': room.id}) }}" class="block text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg w-fit">Edit</a>
+                    <a href="{{ path('app_room_switchreserved', {'id': room.id}) }}" class="block text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg w-fit">Reserver</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <a href="{{ path('app_room_new') }}"
+       class="block text-white bg-blue-600 hover:bg-blue-700 p-2 rounded-lg w-fit mt-5">Create new</a>
+{% endblock %}
